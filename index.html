@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Klasikal BK Kelas X - SMAN 1 Tamban Catur</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <!-- Logo & School Identity -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-brand-600 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                        <i data-lucide="compass" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-display font-bold text-base sm:text-lg text-slate-900 tracking-tight">Bimbingan & Konseling</span>
+                            <span class="hidden sm:inline-block px-2 py-0.5 text-xs font-semibold bg-brand-100 text-brand-700 rounded-full">Kelas X</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-500 font-medium">SMAN 1 Tamban Catur</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button onclick="toggleTeacherNote()" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:text-brand-600 transition shadow-sm" title="Panduan Guru BK">
+                        <i data-lucide="clipboard-list" class="w-4 h-4 text-brand-600"></i>
+                        <span class="hidden md:inline">Panduan RPL Guru</span>
+                    </button>
+                    <button onclick="togglePresentationMode()" id="btn-present" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition shadow-sm">
+                        <i data-lucide="presentation" class="w-4 h-4 text-brand-400"></i>
+                        <span>Mode Proyektor</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section id="hero-section" class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-brand-900 to-indigo-950 text-white py-10 sm:py-14">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-brand-200 text-xs font-medium mb-4">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Layanan Klasikal Kurikulum Merdeka • Fase E</span>
+                </div>
+                <h1 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight mb-3">
+                    Selamat Datang di Ruang Eksplorasi Diri Siswa Kelas X
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                    Media pembelajaran interaktif Bimbingan dan Konseling SMAN 1 Tamban Catur. Pilih satu dari empat bidang layanan di bawah ini untuk memulai sesi materi, diskusi kelas, dan refleksi mandiri.
+                </p>
+                
+                <!-- Domain Navigation Pills -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                    <button onclick="selectDomain('belajar')" id="tab-belajar" class="domain-tab flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all bg-white text-slate-900 border-white shadow-lg">
+                        <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="book-open" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500 font-medium">Bidang 1</div>
+                            <div class="font-bold text-sm">Belajar</div>
+                        </div>
+                    </button>
+
+                    <button onclick="selectDomain('sosial')" id="tab-sosial" class="domain-tab flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all bg-white/10 text-white border-white/15 hover:bg-white/20">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0">
+                            <i data-lucide="users" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-300 font-medium">Bidang 2</div>
+                            <div class="font-bold text-sm">Sosial</div>
+                        </div>
+                    </button>
+
+                    <button onclick="selectDomain('pribadi')" id="tab-pribadi" class="domain-tab flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all bg-white/10 text-white border-white/15 hover:bg-white/20">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
+                            <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-300 font-medium">Bidang 3</div>
+                            <div class="font-bold text-sm">Pribadi</div>
+                        </div>
+                    </button>
+
+                    <button onclick="selectDomain('karir')" id="tab-karir" class="domain-tab flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all bg-white/10 text-white border-white/15 hover:bg-white/20">
+                        <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
+                            <i data-lucide="briefcase" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-300 font-medium">Bidang 4</div>
+                            <div class="font-bold text-sm">Karir</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <!-- Dynamic Content Container -->
+        <div id="content-container" class="fade-in">
+            <!-- Rendered by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+            <div class="flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-brand-600"></i>
+                <span>Unit Bimbingan dan Konseling • <strong>SMAN 1 Tamban Catur</strong></span>
+            </div>
+            <p class="text-xs text-slate-400">Dikembangkan untuk Layanan Klasikal Siswa Kelas X</p>
+        </div>
+    </footer>
+
+    <!-- Modal Panduan Guru BK (RPL Ringkas) -->
+    <div id="teacher-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-200 p-6 sm:p-8 fade-in">
+            <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-5">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Catatan Fasilitator</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900 mt-1">Panduan Pelaksanaan Layanan Klasikal</h3>
+                </div>
+                <button onclick="toggleTeacherNote()" class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
+                <div class="p-4 rounded-xl bg-brand-50 border border-brand-100 text-brand-900">
+                    <p class="font-semibold mb-1">💡 Alokasi Waktu Ideal: 1 x 45 Menit per Topik</p>
+                    <p class="text-xs text-brand-800">Anda dapat menggunakan tombol <strong>"Mode Proyektor"</strong> di pojok kanan atas untuk menyembunyikan banner atas agar tampilan slide materi lebih fokus di layar kelas.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">1. Tahap Awal / Pendahuluan (10 Menit)</h4>
+                    <p>Buka dengan salam, ice breaking singkat, dan sampaikan <strong>4 Tujuan Layanan</strong> yang tertera pada kartu ringkasan tiap bidang agar siswa memahami arah pertemuan.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">2. Tahap Inti / Eksplorasi Materi (25 Menit)</h4>
+                    <p>Klik masing-masing kartu sub-materi untuk membedah konsep. Ajak siswa berdiskusi menggunakan <em>Studi Kasus / Pertanyaan Pemantik</em> yang tersedia di setiap modul.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">3. Tahap Penutup & Asesmen (10 Menit)</h4>
+                    <p>Minta siswa mengisi <strong>Lembar Kerja / Ceklis Interaktif</strong> di bagian bawah setiap bidang. Hasilnya dapat langsung disalin (Copy) oleh siswa untuk dikirim ke Google Classroom / WhatsApp Guru BK sebagai bukti refleksi.</p>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+                <button onclick="toggleTeacherNote()" class="px-5 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-xl hover:bg-brand-700 transition">
+                    Mengerti, Tutup Panduan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification (Pengganti alert()) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-sm font-medium border border-slate-700">
+            <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+            <span id="toast-message">Pesan notifikasi</span>
+        </div>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // Data Materi Lengkap 4 Bidang BK Kelas X
+        const bkData = {
+            belajar: {
+                id: 'belajar',
+                title: 'Bidang Bimbingan Belajar',
+                subtitle: 'Adaptasi Sistem SMA, Strategi Belajar Efektif, & Eksplorasi Gaya Belajar',
+                color: 'blue',
+                badgeBg: 'bg-blue-100',
+                badgeText: 'text-blue-700',
+                accentBg: 'bg-blue-600',
+                accentLight: 'bg-blue-50',
+                accentBorder: 'border-blue-200',
+                icon: 'book-open',
+                objectives: [
+                    'Menyesuaikan diri dengan sistem pembelajaran, kurikulum, dan beban tugas baru di kelas X.',
+                    'Membangun kebiasaan dan strategi belajar yang efektif serta manajemen waktu.',
+                    'Mengatasi hambatan atau kesulitan belajar sejak dini.',
+                    'Mengenali gaya belajar dan potensi akademik diri sendiri.'
+                ],
+                modules: [
+                    {
+                        number: '01',
+                        title: 'Transisi & Adaptasi Kurikulum SMA',
+                        tag: 'Tujuan 1',
+                        summary: 'Memahami perbedaan mendasar antara belajar di SMP dan SMA (Fase E Kurikulum Merdeka) yang menuntut kemandirian dan berpikir kritis.',
+                        points: [
+                            { head: 'Perubahan Ritme Belajar', desc: 'Mata pelajaran di kelas X lebih beragam (IPA, IPS terintegrasi, Informatika, P5) dengan proyek kolaboratif yang membutuhkan manajemen tugas sejak awal.' },
+                            { head: 'Belajar Aktif (Student-Centered)', desc: 'Guru berperan sebagai fasilitator. Siswa SMAN 1 Tamban Catur didorong untuk aktif bertanya, berdiskusi, dan mencari referensi mandiri.' },
+                            { head: 'Sistem Kredit & Ketuntasan', desc: 'Memahami kriteria ketercapaian tujuan pembelajaran (KKTP) dan pentingnya konsistensi nilai dari semester 1 hingga semester 6.' }
+                        ],
+                        discussion: 'Apa perbedaan paling terasa yang kamu alami antara belajar di SMP dulu dengan di kelas X SMAN 1 Tamban Catur saat ini?'
+                    },
+                    {
+                        number: '02',
+                        title: 'Strategi Belajar Efektif & Manajemen Waktu',
+                        tag: 'Tujuan 2',
+                        summary: 'Mengatur prioritas antara kegiatan akademik, ekstrakurikuler, membantu orang tua, dan waktu istirahat.',
+                        points: [
+                            { head: 'Matriks Prioritas Eisenhower', desc: 'Memilah tugas menjadi 4 kuadran: Penting & Mendesak (kerjakan segera), Penting & Tidak Mendesak (jadwalkan), Mendesak tapi Kurang Penting, dan Tidak Keduanya.' },
+                            { head: 'Teknik Pomodoro (25/5)', desc: 'Fokus belajar penuh tanpa gangguan HP selama 25 menit, diikuti istirahat 5 menit untuk menjaga kesegaran otak.' },
+                            { head: 'Metode Mencatat Cornell', desc: 'Membagi halaman catatan menjadi kolom kata kunci, isi materi, dan rangkuman singkat di bagian bawah agar mudah diulang sebelum ujian.' }
+                        ],
+                        discussion: 'Berapa jam rata-rata waktu yang kamu habiskan untuk bermain gawai (HP) dibandingkan waktu mengulang pelajaran di rumah?'
+                    },
+                    {
+                        number: '03',
+                        title: 'Mengatasi Hambatan & Kesulitan Belajar Dini',
+                        tag: 'Tujuan 3',
+                        summary: 'Mendeteksi penyebab turunnya motivasi belajar dan langkah taktis mengatasinya sebelum menumpuk.',
+                        points: [
+                            { head: 'Mengenali Prokrastinasi (Menunda)', desc: 'Kebiasaan menunda tugas sering muncul bukan karena malas, melainkan karena takut salah atau bingung harus mulai dari mana. Pecah tugas besar menjadi langkah kecil!' },
+                            { head: 'Hambatan Lingkungan & Digital', desc: 'Notifikasi media sosial saat belajar memecah konsentrasi hingga 20 menit. Gunakan mode "Jangan Ganggu" saat jam belajar.' },
+                            { head: 'Membangun Support System', desc: 'Jangan ragu membentuk kelompok belajar sebaya, bertanya kepada guru mata pelajaran, atau berkonsultasi dengan Guru BK.' }
+                        ],
+                        discussion: 'Mata pelajaran apa yang paling menantang bagimu di kelas X, dan langkah kecil apa yang bisa kamu lakukan minggu ini?'
+                    },
+                    {
+                        number: '04',
+                        title: 'Mengenali Gaya Belajar (V-A-K) & Potensi Diri',
+                        tag: 'Tujuan 4',
+                        summary: 'Setiap siswa memiliki cara unik dalam menyerap informasi secara optimal.',
+                        points: [
+                            { head: 'Visual (Penglihatan)', desc: 'Mudah paham lewat grafik, warna, mind mapping, dan video. Tips: Gunakan stabilo warna-warni dan buat peta konsep.' },
+                            { head: 'Auditori (Pendengaran)', desc: 'Mudah paham lewat penjelasan lisan, diskusi, dan rekaman suara. Tips: Baca catatan dengan suara pelan atau diskusikan dengan teman.' },
+                            { head: 'Kinestetik (Gerak & Praktik)', desc: 'Mudah paham lewat praktik langsung, eksperimen, dan simulasi. Tips: Belajar sambil berjalan pelan atau membuat model/alat peraga.' }
+                        ],
+                        discussion: 'Coba ingat kembali, saat kamu cepat menghafal atau memahami sesuatu, cara belajar seperti apa yang sedang kamu lakukan?'
+                    }
+                ],
+                interactive: {
+                    type: 'quiz-belajar',
+                    title: 'Mini Asesmen: Cek Gaya Belajar Dominanmu',
+                    desc: 'Pilih pernyataan yang paling menggambarkan kebiasaan belajarmu untuk mendapatkan rekomendasi strategi belajar!'
+                }
+            },
+
+            sosial: {
+                id: 'sosial',
+                title: 'Bidang Bimbingan Sosial',
+                subtitle: 'Adaptasi Lingkungan Baru, Komunikasi Empatik, Etika Digital, & Anti-Perundungan',
+                color: 'emerald',
+                badgeBg: 'bg-emerald-100',
+                badgeText: 'text-emerald-700',
+                accentBg: 'bg-emerald-600',
+                accentLight: 'bg-emerald-50',
+                accentBorder: 'border-emerald-200',
+                icon: 'users',
+                objectives: [
+                    'Beradaptasi dengan teman sebaya, guru, dan budaya lingkungan sekolah baru.',
+                    'Mengembangkan keterampilan komunikasi, kerja sama, dan empati.',
+                    'Memahami etika pergaulan di dunia nyata maupun media sosial.',
+                    'Mencegah dan menangani konflik, perundungan (bullying), serta intoleransi.'
+                ],
+                modules: [
+                    {
+                        number: '01',
+                        title: 'Adaptasi Budaya Sekolah & Relasi Baru',
+                        tag: 'Tujuan 1',
+                        summary: 'Membangun kenyamanan berinteraksi di lingkungan SMAN 1 Tamban Catur dengan teman dari berbagai latar belakang.',
+                        points: [
+                            { head: 'Mengenal Kultur SMAN 1 Tamban Catur', desc: 'Memahami tata tertib sekolah, budaya 5S (Senyum, Sapa, Salam, Sopan, Santun), serta menghormati guru dan tenaga kependidikan.' },
+                            { head: 'Keluar dari Zona Nyaman', desc: 'Tidak hanya berkumpul dengan teman satu SMP asal, tetapi terbuka menjalin pertemanan lintas kelas dan ekstrakurikuler.' },
+                            { head: 'Menghargai Keberagaman', desc: 'Menyadari bahwa setiap teman membawa karakter, kebiasaan, dan latar belakang keluarga yang berbeda namun setara.' }
+                        ],
+                        discussion: 'Hal positif apa yang paling kamu sukai dari suasana pertemanan dan lingkungan di SMAN 1 Tamban Catur?'
+                    },
+                    {
+                        number: '02',
+                        title: 'Komunikasi Asertif, Kerja Sama, & Empati',
+                        tag: 'Tujuan 2',
+                        summary: 'Keterampilan berbicara jujur tanpa menyakiti, serta menjadi pendengar yang baik dalam kerja kelompok.',
+                        points: [
+                            { head: 'Komunikasi Asertif (I-Message)', desc: 'Menyampaikan pendapat atau penolakan secara tegas namun santun. Contoh: "Saya merasa kurang nyaman jika..., sebaiknya kita..." daripada menyalahkan.' },
+                            { head: 'Mendengar Aktif & Empati', desc: 'Mampu menempatkan diri pada posisi teman saat mereka bercerita, tanpa langsung menghakimi atau memotong pembicaraan.' },
+                            { head: 'Kolaborasi Sehat', desc: 'Membagi peran secara adil dalam tugas kelompok dan bertanggung jawab pada bagian masing-masing.' }
+                        ],
+                        discussion: 'Bagaimana cara menolak ajakan teman yang kurang baik tanpa merusak hubungan pertemanan?'
+                    },
+                    {
+                        number: '03',
+                        title: 'Etika Pergaulan Nyata & Bijak Bermedia Sosial',
+                        tag: 'Tujuan 3',
+                        summary: 'Menjaga batasan pergaulan yang sehat serta jejak digital yang positif di era internet.',
+                        points: [
+                            { head: 'Prinsip Saring Sebelum Sharing', desc: 'Pastikan kebenaran informasi (anti-hoaks), manfaatnya, dan dampaknya bagi orang lain sebelum mengunggah status atau komentar.' },
+                            { head: 'Privasi & Keamanan Digital', desc: 'Tidak menyebarkan data pribadi, foto/video orang lain tanpa izin, serta menjaga batasan pergaulan yang sehat di dunia nyata maupun maya.' },
+                            { head: 'Jejak Digital Masa Depan', desc: 'Ingat bahwa apa yang diunggah di internet sulit dihapus sepenuhnya dan dapat memengaruhi reputasi hingga dunia kuliah/kerja.' }
+                        ],
+                        discussion: 'Mengapa komentar negatif di media sosial sering kali terasa lebih menyakitkan daripada ucapan langsung?'
+                    },
+                    {
+                        number: '04',
+                        title: 'Stop Bullying, Konflik, & Intoleransi!',
+                        tag: 'Tujuan 4',
+                        summary: 'Menciptakan lingkungan sekolah yang aman, inklusif, dan bebas dari segala bentuk perundungan.',
+                        points: [
+                            { head: 'Mengenali Bentuk Bullying', desc: 'Perundungan tidak hanya fisik (memukul), tetapi juga verbal (mengejek fisik/nama orang tua), sosial (mengucilkan), dan cyberbullying.' },
+                            { head: 'Peran Upstander (Pembela)', desc: 'Jangan menjadi penonton diam (bystander). Dukung korban, jangan ikut menertawakan, dan segera laporkan kepada Guru BK atau wali kelas.' },
+                            { head: 'Resolusi Konflik Damai', desc: 'Menyelesaikan kesalahpahaman dengan kepala dingin, mediasi, serta menjunjung tinggi toleransi antar sesama siswa.' }
+                        ],
+                        discussion: 'Jika kamu melihat temanmu dikucilkan atau diejek terus-menerus di grup chat kelas, tindakan nyata apa yang akan kamu ambil?'
+                    }
+                ],
+                interactive: {
+                    type: 'checklist-sosial',
+                    title: 'Refleksi Interaktif: Komitmen Warga Sekolah Ramah & Anti-Bullying',
+                    desc: 'Centang perilaku positif yang sudah dan akan terus kamu terapkan di SMAN 1 Tamban Catur:'
+                }
+            },
+
+            pribadi: {
+                id: 'pribadi',
+                title: 'Bidang Bimbingan Pribadi',
+                subtitle: 'Konsep Diri, Kesehatan Mental Remaja, Kemandirian, & Pengambilan Keputusan',
+                color: 'amber',
+                badgeBg: 'bg-amber-100',
+                badgeText: 'text-amber-700',
+                accentBg: 'bg-amber-600',
+                accentLight: 'bg-amber-50',
+                accentBorder: 'border-amber-200',
+                icon: 'heart-handshake',
+                objectives: [
+                    'Mengenal identitas, kekuatan, kelemahan, minat, serta nilai-nilai pribadi.',
+                    'Mengelola emosi, stres, dan menjaga kesehatan mental di masa remaja awal/menengah.',
+                    'Menumbuhkan rasa percaya diri, tanggung jawab, dan kemandirian.',
+                    'Membuat keputusan yang sehat dan sesuai norma yang berlaku.'
+                ],
+                modules: [
+                    {
+                        number: '01',
+                        title: 'Eksplorasi Identitas & Kekuatan Diri (SWOT Pribadi)',
+                        tag: 'Tujuan 1',
+                        summary: 'Mengenal siapa dirimu secara utuh: potensi yang dibanggakan maupun area yang perlu dikembangkan.',
+                        points: [
+                            { head: 'Menerima Keunikan Diri', desc: 'Setiap remaja memiliki ritme tumbuh yang berbeda. Berhenti membandingkan kelemahanmu dengan kelebihan orang lain di media sosial.' },
+                            { head: 'Nilai-Nilai Pribadi (Personal Values)', desc: 'Menentukan prinsip hidup yang kamu pegang teguh, seperti kejujuran, kerja keras, kepedulian, dan ketakwaan.' },
+                            { head: 'Mengubah Kelemahan Jadi Ruang Tumbuh', desc: 'Menggunakan pola pikir berkembang (Growth Mindset): "Saya belum bisa" bukan "Saya tidak berbakat".' }
+                        ],
+                        discussion: 'Sebutkan 2 kelebihan dirimu yang sering dipuji orang lain, dan 1 kebiasaan diri yang ingin kamu perbaiki di kelas X!'
+                    },
+                    {
+                        number: '02',
+                        title: 'Regulasi Emosi, Manajemen Stres, & Kesehatan Mental',
+                        tag: 'Tujuan 2',
+                        summary: 'Memahami gejolak emosi masa remaja dan teknik pertolongan pertama saat merasa cemas atau tertekan.',
+                        points: [
+                            { head: 'Validasi Semua Emosi', desc: 'Marah, sedih, kecewa, dan cemas adalah emosi yang wajar. Yang perlu dikendalikan adalah perilaku yang muncul akibat emosi tersebut.' },
+                            { head: 'Teknik Grounding 5-4-3-2-1 & Pernapasan', desc: 'Saat panik atau stres: tarik napas 4 detik, tahan 4 detik, hembuskan 6 detik untuk menenangkan sistem saraf.' },
+                            { head: 'Jangan Memendam Sendiri', desc: 'Menjaga kesehatan mental sama pentingnya dengan kesehatan fisik. Ruang BK SMAN 1 Tamban Catur selalu terbuka dan menjamin kerahasiaan.' }
+                        ],
+                        discussion: 'Kegiatan positif apa yang biasanya paling ampuh mengembalikan suasana hatimu saat sedang merasa penat atau sedih?'
+                    },
+                    {
+                        number: '03',
+                        title: 'Kepercayaan Diri, Tanggung Jawab, & Kemandirian',
+                        tag: 'Tujuan 3',
+                        summary: 'Membangun karakter pelajar SMA yang mandiri dan berani bertanggung jawab atas pilihan hidupnya.',
+                        points: [
+                            { head: 'Akar Kepercayaan Diri', desc: 'Rasa percaya diri tumbuh dari persiapan yang matang dan keberanian mencoba hal baru meski ada risiko gagal.' },
+                            { head: 'Kemandirian Remaja', desc: 'Mulai mengelola kebutuhan belajar sendiri, bangun pagi tanpa bergantung penuh pada orang tua, dan inisiatif menyelesaikan masalah.' },
+                            { head: 'Integritas & Tanggung Jawab', desc: 'Berani mengakui kesalahan tanpa mencari kambing hitam serta menepati komitmen yang telah dibuat.' }
+                        ],
+                        discussion: 'Dalam hal apa kamu merasa sudah jauh lebih mandiri dibandingkan saat masih duduk di bangku SMP?'
+                    },
+                    {
+                        number: '04',
+                        title: 'Pengambilan Keputusan Sehat & Sesuai Norma',
+                        tag: 'Tujuan 4',
+                        summary: 'Melatih berpikir kritis sebelum bertindak agar terhindar dari perilaku berisiko.',
+                        points: [
+                            { head: 'Metode POOCH dalam Memutuskan', desc: 'Problem (Masalah) -> Options (Pilihan) -> Outcomes (Dampak tiap pilihan) -> Choice (Keputusan terbaik).' },
+                            { head: 'Menjaga Kesehatan Fisik & Perilaku', desc: 'Menjauhi rokok, pergaulan bebas, balap liar, dan penyalahgunaan zat adiktif yang merusak masa depan.' },
+                            { head: 'Selaras Norma Agama & Sosial', desc: 'Menjadikan nilai agama, norma keluarga, dan aturan masyarakat sebagai kompas utama saat menghadapi dilema.' }
+                        ],
+                        discussion: 'Ketika dihadapkan pada dua pilihan yang sama-sama menarik, pertimbangan apa yang biasanya paling menentukan keputusanmu?'
+                    }
+                ],
+                interactive: {
+                    type: 'reflection-pribadi',
+                    title: 'Lembar Refleksi Diri: Peta Kekuatan & Kesejahteraan Mental',
+                    desc: 'Isi secara jujur untuk dirimu sendiri. Kamu dapat menyalin hasilnya untuk disimpan atau dibagikan ke Guru BK.'
+                }
+            },
+
+            karir: {
+                id: 'karir',
+                title: 'Bidang Bimbingan Karir',
+                subtitle: 'Wawasan Dunia Kerja, Arah Peminatan Mata Pelajaran, & Perencanaan Masa Depan',
+                color: 'purple',
+                badgeBg: 'bg-purple-100',
+                badgeText: 'text-purple-700',
+                accentBg: 'bg-purple-600',
+                accentLight: 'bg-purple-50',
+                accentBorder: 'border-purple-200',
+                icon: 'briefcase',
+                objectives: [
+                    'Mengenal beragam informasi dunia kerja, profesi, serta jalur pendidikan lanjutan.',
+                    'Menghubungkan bakat, minat, dan nilai diri dengan arah peminatan atau perencanaan studi lanjut.',
+                    'Menumbuhkan kesadaran awal untuk merancang masa depan secara realistis dan terarah.',
+                    'Membiasakan sikap proaktif dalam memantau perkembangan diri untuk rencana karir.'
+                ],
+                modules: [
+                    {
+                        number: '01',
+                        title: 'Eksplorasi Dunia Profesi & Jalur Pendidikan Lanjut',
+                        tag: 'Tujuan 1',
+                        summary: 'Membuka wawasan tentang berbagai jalur setelah lulus dari SMAN 1 Tamban Catur dan tren pekerjaan masa depan.',
+                        points: [
+                            { head: '4 Jalur Utama Pasca-SMA', desc: '1) Perguruan Tinggi Akademik (S1), 2) Pendidikan Vokasi/Politeknik (D3/D4), 3) Sekolah Kedinasan/TNI/Polri, 4) Dunia Kerja & Wirausaha.' },
+                            { head: 'Transformasi Profesi Era Digital', desc: 'Munculnya profesi baru di bidang teknologi, ekonomi kreatif, agribisnis modern, kesehatan, dan energi terbarukan.' },
+                            { head: 'Keterampilan Abad 21', desc: 'Selain nilai akademik, dunia kerja membutuhkan kemampuan komunikasi, pemecahan masalah kompleks, literasi digital, dan adaptabilitas.' }
+                        ],
+                        discussion: 'Profesi apa yang paling membuatmu penasaran saat ini, dan apakah kamu sudah tahu jurusan pendidikan untuk mencapainya?'
+                    },
+                    {
+                        number: '02',
+                        title: 'Menghubungkan Bakat, Minat, & Arah Peminatan Kelas XI',
+                        tag: 'Tujuan 2',
+                        summary: 'Persiapan matang sejak kelas X untuk memilih mata pelajaran pilihan di kelas XI sesuai Kurikulum Merdeka.',
+                        points: [
+                            { head: 'Pemilihan Mapel Pilihan di Kelas XI', desc: 'Di Kurikulum Merdeka, tidak ada lagi penjurusan kaku IPA/IPS/Bahasa, melainkan pemilihan kombinasi mata pelajaran yang mendukung karir.' },
+                            { head: 'Mengenal Minat Karir RIASEC', desc: 'Realistic (praktis/teknik), Investigative (riset/sains), Artistic (seni/desain), Social (mengajar/menolong), Enterprising (bisnis/memimpin), Conventional (administrasi/data).' },
+                            { head: 'Hindari Ikut-Ikutan Teman', desc: 'Pilih mata pelajaran dan rencana jurusan berdasarkan potensi dirimu sendiri, bukan sekadar mengikuti pilihan sahabat.' }
+                        ],
+                        discussion: 'Kelompok mata pelajaran apa (Sains, Sosial Humaniora, Bahasa, atau Terapan) yang paling membuatmu antusias saat belajar?'
+                    },
+                    {
+                        number: '03',
+                        title: 'Merancang Peta Masa Depan Secara Realistis',
+                        tag: 'Tujuan 3',
+                        summary: 'Menyusun target jangka pendek, menengah, dan panjang yang terukur dan realistis.',
+                        points: [
+                            { head: 'Formula Tujuan SMART', desc: 'Specific (Spesifik), Measurable (Terukur), Achievable (Dapat dicapai), Relevant (Relevan dengan potensi), Time-bound (Ada batas waktu).' },
+                            { head: 'Diskusi Terbuka dengan Orang Tua', desc: 'Menyelaraskan cita-cita siswa dengan harapan serta dukungan kondisi ekonomi keluarga sejak dini.' },
+                            { head: 'Menyiapkan Rencana A dan Rencana B', desc: 'Memiliki alternatif pilihan jurusan atau jalur karir agar tetap optimis dalam berbagai situasi.' }
+                        ],
+                        discussion: 'Bayangkan dirimu 5 tahun dari sekarang (setelah lulus SMA), aktivitas atau pencapaian apa yang paling ingin kamu wujudkan?'
+                    },
+                    {
+                        number: '04',
+                        title: 'Sikap Proaktif & Membangun Portofolio Sejak Kelas X',
+                        tag: 'Tujuan 4',
+                        summary: 'Karir tidak ditunggu setelah lulus, melainkan dibangun langkah demi langkah sejak bangku kelas X.',
+                        points: [
+                            { head: 'Menjaga Grafik Nilai Rapor', desc: 'Seleksi masuk perguruan tinggi jalur prestasi (SNBP) dan sekolah kedinasan menilai konsistensi nilai rapor dari semester 1 hingga 5.' },
+                            { head: 'Aktif Organisasi & Prestasi', desc: 'Mengikuti OSIS, Pramuka, Paskibra, PMR, olahraga, seni, atau olimpiade sains untuk melatih kepemimpinan dan memperkaya portofolio.' },
+                            { head: 'Konsultasi Karir Berkala', desc: 'Manfaatkan layanan konsultasi karir bersama Guru BK SMAN 1 Tamban Catur untuk memetakan peluang beasiswa dan jurusan.' }
+                        ],
+                        discussion: 'Ekstrakurikuler atau kegiatan pengembangan diri apa di sekolah yang ingin kamu tekuni untuk mendukung cita-citamu?'
+                    }
+                ],
+                interactive: {
+                    type: 'planner-karir',
+                    title: 'Kanvas Perencanaan Karir Awal Kelas X',
+                    desc: 'Susun draf rencana eksplorasi dirimu di kelas X dan salin untuk didiskusikan bersama Guru BK atau orang tua.'
+                }
+            }
+        };
+
+        let currentDomain = 'belajar';
+        let isPresentationMode = false;
+
+        // Render Domain Content
+        function selectDomain(domainKey) {
+            currentDomain = domainKey;
+            const data = bkData[domainKey];
+
+            // Update Tab Styling
+            document.querySelectorAll('.domain-tab').forEach(tab => {
+                tab.className = 'domain-tab flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all bg-white/10 text-white border-white/15 hover:bg-white/20 cursor-pointer';
+            });
+            const activeTab = document.getElementById(`tab-${domainKey}`);
+            if (activeTab) {
+                activeTab.className = 'domain-tab flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all bg-white text-slate-900 border-white shadow-lg scale-[1.02] cursor-pointer';
+            }
+
+            const container = document.getElementById('content-container');
+            container.classList.remove('fade-in');
+            void container.offsetWidth; // trigger reflow
+            container.classList.add('fade-in');
+
+            container.innerHTML = `
+                <!-- Header Bidang & 4 Tujuan Layanan -->
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-6 sm:p-8 mb-8">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl ${data.badgeBg} ${data.badgeText} flex items-center justify-center shrink-0">
+                                <i data-lucide="${data.icon}" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+                            </div>
+                            <div>
+                                <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide ${data.badgeBg} ${data.badgeText} mb-1.5">
+                                    Layanan Klasikal Kelas X
+                                </span>
+                                <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">${data.title}</h2>
+                                <p class="text-slate-500 text-sm sm:text-base mt-1">${data.subtitle}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Tujuan Layanan -->
+                    <div>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+                            <i data-lucide="target" class="w-4 h-4 text-brand-600"></i>
+                            Tujuan Layanan yang Akan Dicapai Siswa:
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${data.objectives.map((obj, idx) => `
+                                <div class="flex items-start gap-3 p-3.5 rounded-xl ${data.accentLight} border ${data.accentBorder}">
+                                    <span class="w-6 h-6 rounded-full ${data.accentBg} text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                        ${idx + 1}
+                                    </span>
+                                    <p class="text-sm font-medium text-slate-800 leading-snug">${obj}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid 4 Modul Materi -->
+                <div class="mb-4 flex items-center justify-between">
+                    <h3 class="font-display text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="layers" class="w-5 h-5 text-brand-600"></i>
+                        Pokok Bahasan & Materi Inti
+                    </h3>
+                    <span class="text-xs text-slate-500 hidden sm:inline">Klik kartu untuk memfokuskan materi diskusi</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                    ${data.modules.map((mod, mIdx) => `
+                        <article class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="text-xs font-extrabold px-2.5 py-1 rounded-lg ${data.badgeBg} ${data.badgeText}">
+                                        Topik ${mod.number} • ${mod.tag}
+                                    </span>
+                                    <button onclick="copyModuleText('${domainKey}', ${mIdx})" class="text-xs text-slate-400 hover:text-brand-600 flex items-center gap-1 transition" title="Salin ringkasan materi">
+                                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                        <span>Salin</span>
+                                    </button>
+                                </div>
+                                <h4 class="font-display text-lg sm:text-xl font-bold text-slate-900 mb-2">${mod.title}</h4>
+                                <p class="text-sm text-slate-600 mb-5 leading-relaxed">${mod.summary}</p>
+                                
+                                <div class="space-y-3">
+                                    ${mod.points.map(pt => `
+                                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <div class="font-semibold text-sm text-slate-900 mb-1 flex items-center gap-1.5">
+                                                <span class="w-1.5 h-1.5 rounded-full ${data.accentBg}"></span>
+                                                ${pt.head}
+                                            </div>
+                                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-3">${pt.desc}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Kotak Diskusi Kelas -->
+                            <div class="px-6 py-4 bg-slate-900 text-white border-t border-slate-800">
+                                <div class="flex items-start gap-2.5">
+                                    <i data-lucide="message-circle-question" class="w-5 h-5 text-brand-400 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <span class="text-[11px] font-bold uppercase tracking-wider text-brand-300 block mb-0.5">Pertanyaan Pemantik Diskusi Kelas</span>
+                                        <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">"${mod.discussion}"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    `).join('')}
+                </div>
+
+                <!-- Aktivitas Interaktif Siswa (LKPD Digital) -->
+                <div class="bg-white rounded-2xl border-2 border-slate-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 mb-6 border-b border-slate-100">
+                        <div>
+                            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-600 mb-1">
+                                <i data-lucide="pen-tool" class="w-3.5 h-3.5"></i>
+                                Lembar Kerja Peserta Didik (LKPD) Interaktif
+                            </span>
+                            <h3 class="font-display text-xl font-bold text-slate-900">${data.interactive.title}</h3>
+                            <p class="text-sm text-slate-500 mt-1">${data.interactive.desc}</p>
+                        </div>
+                    </div>
+                    <div id="interactive-area">
+                        ${renderInteractiveWidget(data.interactive.type)}
+                    </div>
+                </div>
+            `;
+
+            lucide.createIcons();
+        }
+
+        // Render LKPD Interaktif per Bidang
+        function renderInteractiveWidget(type) {
+            if (type === 'quiz-belajar') {
+                return `
+                    <div class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                                <p class="font-semibold text-sm text-slate-800 mb-3">1. Saat mengingat materi pelajaran baru, saya paling terbantu jika...</p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q1" value="V" class="mt-1 accent-blue-600">
+                                        <span>Melihat diagram, gambar, atau catatan warna-warni.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q1" value="A" class="mt-1 accent-blue-600">
+                                        <span>Mendengarkan penjelasan guru atau berdiskusi dengan teman.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q1" value="K" class="mt-1 accent-blue-600">
+                                        <span>Langsung mencoba praktik atau membuat ringkasan sendiri.</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                                <p class="font-semibold text-sm text-slate-800 mb-3">2. Saat waktu luang di rumah, aktivitas yang paling saya nikmati adalah...</p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q2" value="V" class="mt-1 accent-blue-600">
+                                        <span>Menonton video, menggambar, atau membaca komik/artikel.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q2" value="A" class="mt-1 accent-blue-600">
+                                        <span>Mendengarkan musik, podcast, atau mengobrol panjang.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q2" value="K" class="mt-1 accent-blue-600">
+                                        <span>Berolahraga, merakit sesuatu, atau jalan-jalan aktif.</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                                <p class="font-semibold text-sm text-slate-800 mb-3">3. Ketika merakit barang baru, saya cenderung...</p>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q3" value="V" class="mt-1 accent-blue-600">
+                                        <span>Melihat gambar petunjuk langkah demi langkah.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q3" value="A" class="mt-1 accent-blue-600">
+                                        <span>Meminta orang lain membacakan atau menjelaskan caranya.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-white transition">
+                                        <input type="radio" name="q3" value="K" class="mt-1 accent-blue-600">
+                                        <span>Langsung mencoba memasang komponennya tanpa banyak membaca.</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3">
+                            <button onclick="evaluateLearningStyle()" class="px-5 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition shadow-sm">
+                                Lihat Hasil Gaya Belajarku
+                            </button>
+                        </div>
+                        <div id="learning-result" class="hidden p-4 rounded-xl bg-blue-50 border border-blue-200 text-sm text-slate-800"></div>
+                    </div>
+                `;
+            }
+
+            if (type === 'checklist-sosial') {
+                const items = [
+                    'Menyapa guru dan teman dengan ramah di lingkungan SMAN 1 Tamban Catur.',
+                    'Mendengarkan pendapat teman saat diskusi kelompok tanpa memotong pembicaraan.',
+                    'Memastikan kebenaran informasi sebelum membagikan pesan di grup WhatsApp/Media Sosial.',
+                    'Tidak mengejek fisik, nama orang tua, atau latar belakang teman (baik bercanda maupun serius).',
+                    'Berani melapor kepada Guru BK jika melihat tindakan perundungan (bullying) di sekolah.'
+                ];
+                return `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 gap-2.5">
+                            ${items.map((item, i) => `
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-emerald-50/50 cursor-pointer transition">
+                                    <input type="checkbox" class="social-check w-5 h-5 rounded accent-emerald-600" value="${item}">
+                                    <span class="text-sm text-slate-700 font-medium">${item}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                            <input type="text" id="social-student-name" placeholder="Tulis Nama & Kelas (Contoh: Budi - X.1)" class="px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:w-72">
+                            <button onclick="copySocialCommitment()" class="px-5 py-2.5 bg-emerald-600 text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 transition inline-flex items-center justify-center gap-2">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                                <span>Salin Komitmen Sosial Saya</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (type === 'reflection-pribadi') {
+                return `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">Nama & Kelas</label>
+                                <input type="text" id="pribadi-name" placeholder="Contoh: Siti Aminah - Kelas X.2" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">2 Kekuatan / Potensi Positif Diriku</label>
+                                <input type="text" id="pribadi-strength" placeholder="Contoh: Mudah bergaul, tekun menggambar" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">Hal yang Sering Membuatku Stres/Cemas di Kelas X</label>
+                                <input type="text" id="pribadi-stress" placeholder="Contoh: Takut salah saat presentasi di depan kelas" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">Cara Sehat yang Akan Kulakukan untuk Mengatasinya</label>
+                                <input type="text" id="pribadi-coping" placeholder="Contoh: Latihan bicara di cermin & tarik napas dalam" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            </div>
+                        </div>
+                        <button onclick="copyPribadiReflection()" class="px-5 py-2.5 bg-amber-600 text-white text-sm font-semibold rounded-xl hover:bg-amber-700 transition inline-flex items-center gap-2">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                            <span>Salin Hasil Refleksi Pribadi</span>
+                        </button>
+                    </div>
+                `;
+            }
+
+            if (type === 'planner-karir') {
+                return `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">Nama & Kelas</label>
+                                <input type="text" id="karir-name" placeholder="Contoh: Ahmad Rizki - Kelas X.3" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">Mata Pelajaran Favorit & Minat Utama</label>
+                                <input type="text" id="karir-interest" placeholder="Contoh: Biologi & Informatika / Suka menganalisis" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">Rencana Jalur Setelah Lulus SMAN 1 Tamban Catur</label>
+                                <select id="karir-path" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white">
+                                    <option value="Kuliah Sarjana (S1)">Kuliah Sarjana (S1)</option>
+                                    <option value="Pendidikan Vokasi / Politeknik (D3/D4)">Pendidikan Vokasi / Politeknik (D3/D4)</option>
+                                    <option value="Sekolah Kedinasan / TNI / Polri">Sekolah Kedinasan / TNI / Polri</option>
+                                    <option value="Langsung Bekerja / Wirausaha">Langsung Bekerja / Wirausaha</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1.5">Cita-Cita Profesi & Langkah Awal di Kelas X</label>
+                                <input type="text" id="karir-goal" placeholder="Contoh: Perawat / Ikut ekstrakurikuler PMR & jaga nilai IPA" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                        </div>
+                        <button onclick="copyKarirPlan()" class="px-5 py-2.5 bg-purple-600 text-white text-sm font-semibold rounded-xl hover:bg-purple-700 transition inline-flex items-center gap-2">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                            <span>Salin Peta Rencana Karir</span>
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Fungsi Evaluasi Gaya Belajar
+        function evaluateLearningStyle() {
+            const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+            const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+            const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+
+            if (!q1 || !q2 || !q3) {
+                showToast('Silakan jawab ketiga pertanyaan terlebih dahulu!');
+                return;
+            }
+
+            const counts = { V: 0, A: 0, K: 0 };
+            [q1, q2, q3].forEach(ans => counts[ans]++);
+
+            let resultTitle = 'Kombinasi Seimbang (Multimodal)';
+            let resultTip = 'Kamu fleksibel menggunakan berbagai cara belajar! Gabungkan catatan berwarna, diskusi kelompok, dan latihan soal secara berkala.';
+
+            if (counts.V >= 2) {
+                resultTitle = 'Dominan VISUAL (Penglihatan)';
+                resultTip = 'Tips Belajar: Gunakan stabilo warna-warni, buat mind mapping (peta konsep), tonton video pembelajaran, dan duduk di bangku depan agar jelas melihat papan tulis.';
+            } else if (counts.A >= 2) {
+                resultTitle = 'Dominan AUDITORI (Pendengaran)';
+                resultTip = 'Tips Belajar: Dengarkan penjelasan guru dengan saksama, bentuk kelompok diskusi kecil, dan baca ulang rangkuman materi dengan suara perlahan.';
+            } else if (counts.K >= 2) {
+                resultTitle = 'Dominan KINESTETIK (Gerak & Praktik)';
+                resultTip = 'Tips Belajar: Perbanyak latihan soal/praktik langsung, gunakan teknik belajar Pomodoro (25 menit fokus, 5 menit peregangan), dan buat catatan ringkas dengan tangan.';
+            }
+
+            const resDiv = document.getElementById('learning-result');
+            resDiv.classList.remove('hidden');
+            resDiv.innerHTML = `
+                <div class="font-bold text-blue-900 text-base mb-1">Hasil Gaya Belajarmu: ${resultTitle}</div>
+                <p class="text-slate-700 mb-3">${resultTip}</p>
+                <button onclick="copyTextToClipboard('Hasil Gaya Belajar Kelas X SMAN 1 Tamban Catur: ${resultTitle}. ${resultTip}')" class="text-xs font-semibold text-blue-700 underline hover:text-blue-900">
+                    Salin hasil ini ke clipboard
+                </button>
+            `;
+        }
+
+        // Fungsi Salin Komitmen Sosial
+        function copySocialCommitment() {
+            const name = document.getElementById('social-student-name').value.trim() || 'Siswa Kelas X';
+            const checked = Array.from(document.querySelectorAll('.social-check:checked')).map(el => '- ' + el.value);
+            if (checked.length === 0) {
+                showToast('Pilih minimal 1 komitmen sosial terlebih dahulu.');
+                return;
+            }
+            const text = `KOMITMEN SOSIAL SISWA SMAN 1 TAMBAN CATUR\nNama/Kelas: ${name}\nSaya berkomitmen untuk:\n${checked.join('\n')}`;
+            copyTextToClipboard(text);
+        }
+
+        // Fungsi Salin Refleksi Pribadi
+        function copyPribadiReflection() {
+            const name = document.getElementById('pribadi-name').value.trim() || 'Siswa Kelas X';
+            const str = document.getElementById('pribadi-strength').value.trim() || '-';
+            const stress = document.getElementById('pribadi-stress').value.trim() || '-';
+            const coping = document.getElementById('pribadi-coping').value.trim() || '-';
+
+            const text = `REFLEKSI PRIBADI BK KELAS X - SMAN 1 TAMBAN CATUR\nNama/Kelas: ${name}\n1. Kekuatan Diri: ${str}\n2. Sumber Stres/Cemas: ${stress}\n3. Strategi Mengatasi: ${coping}`;
+            copyTextToClipboard(text);
+        }
+
+        // Fungsi Salin Rencana Karir
+        function copyKarirPlan() {
+            const name = document.getElementById('karir-name').value.trim() || 'Siswa Kelas X';
+            const interest = document.getElementById('karir-interest').value.trim() || '-';
+            const path = document.getElementById('karir-path').value;
+            const goal = document.getElementById('karir-goal').value.trim() || '-';
+
+            const text = `PETA RENCANA KARIR AWAL KELAS X - SMAN 1 TAMBAN CATUR\nNama/Kelas: ${name}\n1. Mapel Favorit & Minat: ${interest}\n2. Rencana Jalur Lulus SMA: ${path}\n3. Cita-cita & Langkah Awal: ${goal}`;
+            copyTextToClipboard(text);
+        }
+
+        // Salin Ringkasan Modul Materi
+        function copyModuleText(domainKey, modIdx) {
+            const mod = bkData[domainKey].modules[modIdx];
+            const pointsText = mod.points.map(p => `• ${p.head}: ${p.desc}`).join('\n');
+            const fullText = `MATERI BK KELAS X - SMAN 1 TAMBAN CATUR\n${mod.title}\n${mod.summary}\n\n${pointsText}\n\nPertanyaan Diskusi: ${mod.discussion}`;
+            copyTextToClipboard(fullText);
+        }
+
+        // Utilitas Copy Clipboard (Kompatibel Iframe)
+        function copyTextToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Teks berhasil disalin! Siap ditempel ke dokumen/chat.');
+            } catch (err) {
+                showToast('Gagal menyalin teks.');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Notifikasi Toast
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Toggle Panduan Guru BK
+        function toggleTeacherNote() {
+            const modal = document.getElementById('teacher-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Mode Proyektor (Fokus Presentasi Kelas)
+        function togglePresentationMode() {
+            isPresentationMode = !isPresentationMode;
+            const hero = document.getElementById('hero-section');
+            const btn = document.getElementById('btn-present');
+
+            if (isPresentationMode) {
+                // Ubah hero menjadi bar navigasi ringkas
+                hero.classList.remove('py-10', 'sm:py-14');
+                hero.classList.add('py-4');
+                hero.querySelector('h1').classList.add('hidden');
+                hero.querySelector('p').classList.add('hidden');
+                btn.innerHTML = `<i data-lucide="minimize-2" class="w-4 h-4 text-amber-400"></i><span>Keluar Mode Proyektor</span>`;
+                showToast('Mode Proyektor Aktif: Tampilan lebih ringkas untuk layar kelas.');
+            } else {
+                hero.classList.add('py-10', 'sm:py-14');
+                hero.classList.remove('py-4');
+                hero.querySelector('h1').classList.remove('hidden');
+                hero.querySelector('p').classList.remove('hidden');
+                btn.innerHTML = `<i data-lucide="presentation" class="w-4 h-4 text-brand-400"></i><span>Mode Proyektor</span>`;
+            }
+            lucide.createIcons();
+        }
+
+        // Inisialisasi Halaman Pertama Kali
+        window.addEventListener('DOMContentLoaded', () => {
+            selectDomain('belajar');
+        });
+    </script>
+</body>
+</html>
